@@ -1,0 +1,21 @@
+{
+  "name": "Abbin Varghese - Senior Java Developer",
+  "short_name": "Abbin V Portfolio",
+  "description": "Senior Java Developer with 15+ years experience in enterprise applications and microservices",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0a0a0a",
+  "theme_color": "#00ff88",
+  "icons": [
+    {
+      "src": "icon.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}

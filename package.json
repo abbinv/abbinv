@@ -1,0 +1,27 @@
+{
+  "name": "abbin-v-portfolio",
+  "version": "1.0.0",
+  "description": "Modern portfolio website for Abbin V - Java Developer",
+  "private": true,
+  "keywords": [
+    "portfolio",
+    "java-developer",
+    "spring-boot",
+    "microservices",
+    "enterprise"
+  ],
+  "license": "MIT",
+  "author": "Abbin V",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "firebase serve",
+    "build": "echo \"Build complete\"",
+    "deploy": "firebase deploy",
+    "deploy:prod": "firebase deploy --only hosting",
+    "validate": "html5validator --root public/",
+    "lighthouse": "lighthouse https://abbinv-portfolio.web.app --output html"
+  },
+  "devDependencies": {
+    "firebase-tools": "^13.0.0"
+  }
+}
