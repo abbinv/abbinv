@@ -393,9 +393,42 @@ class ParticleSystem {
   }
 }
 
+// Theme Toggle
+class ThemeToggle {
+  constructor() {
+    this.toggle = document.getElementById('theme-toggle');
+    this.icon = document.querySelector('.theme-icon');
+    this.init();
+  }
+
+  init() {
+    // Check for saved theme or default to dark
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+    this.setTheme(savedTheme);
+
+    // Toggle theme on click
+    this.toggle.addEventListener('click', () => {
+      const currentTheme = document.documentElement.getAttribute('data-theme');
+      const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+      this.setTheme(newTheme);
+    });
+  }
+
+  setTheme(theme) {
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('theme', theme);
+    this.icon.textContent = theme === 'light' ? '🌙' : '☀️';
+  }
+}
+
 // Initialize particles on desktop only
 if (window.innerWidth > 768) {
   document.addEventListener('DOMContentLoaded', () => {
     new ParticleSystem();
   });
 }
+
+// Initialize theme toggle
+document.addEventListener('DOMContentLoaded', () => {
+  new ThemeToggle();
+});

@@ -44,6 +44,10 @@
   <link rel="dns-prefetch" href="//fonts.googleapis.com">
   <link rel="dns-prefetch" href="//fonts.gstatic.com">
   
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8437328263455404"
+       crossorigin="anonymous"></script>
+  
   <!-- Structured Data -->
   <script type="application/ld+json">
   {
@@ -103,10 +107,15 @@
         <li><a href="#projects" class="nav-link">projects</a></li>
         <li><a href="#contact" class="nav-link">contact</a></li>
       </ul>
-      <div class="nav-toggle">
-        <span></span>
-        <span></span>
-        <span></span>
+      <div class="nav-actions">
+        <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+          <span class="theme-icon">🌙</span>
+        </button>
+        <div class="nav-toggle">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
       </div>
     </div>
   </nav>
@@ -663,23 +672,9 @@ public AboutMe() {
             <div class="contact-icon">🐙</div>
             <div class="contact-details">
               <h4>GitHub</h4>
-              <a href="#" target="_blank">github.com/abbinv</a>
+              <a href="https://github.com/abbinv/abbinv" target="_blank">github.com/abbinv</a>
             </div>
           </div>
-        </div>
-        <div class="contact-form">
-          <form class="form">
-            <div class="form-group">
-              <input type="text" class="form-input" placeholder="Your Name" required>
-            </div>
-            <div class="form-group">
-              <input type="email" class="form-input" placeholder="Your Email" required>
-            </div>
-            <div class="form-group">
-              <textarea class="form-input" rows="5" placeholder="Your Message" required></textarea>
-            </div>
-            <button type="submit" class="form-submit">Send Message</button>
-          </form>
         </div>
       </div>
       <div class="section-footer">};</div>
@@ -692,7 +687,7 @@ public AboutMe() {
   <footer class="footer" role="contentinfo">
     <div class="container">
       <div class="footer-content">
-        <p>&copy; 2024 Abbin V. Built with Java and passion.</p>
+        <p>&copy; 2024 abbinv. All rights reserved. Built with AI and passion.</p>
         <div class="footer-command">
           <span class="prompt">></span>
           <span class="command">System.out.println("Thanks for visiting!");</span>
