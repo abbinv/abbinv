@@ -311,12 +311,8 @@ document.addEventListener('DOMContentLoaded', () => {
   new FormHandler();
   new TypingAnimation();
   
-  // Add loading animation
-  document.body.style.opacity = '0';
-  setTimeout(() => {
-    document.body.style.transition = 'opacity 0.5s ease';
-    document.body.style.opacity = '1';
-  }, 100);
+  // Add loaded class for CSS animations
+  document.body.classList.add('loaded');
 });
 
 // Handle window resize
@@ -327,71 +323,7 @@ window.addEventListener('resize', () => {
   }
 });
 
-// Add some interactive particles (optional enhancement)
-class ParticleSystem {
-  constructor() {
-    this.canvas = document.createElement('canvas');
-    this.ctx = this.canvas.getContext('2d');
-    this.particles = [];
-    this.init();
-  }
 
-  init() {
-    this.canvas.style.cssText = `
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: -1;
-      opacity: 0.1;
-    `;
-    
-    document.body.appendChild(this.canvas);
-    this.resize();
-    this.createParticles();
-    this.animate();
-    
-    window.addEventListener('resize', () => this.resize());
-  }
-
-  resize() {
-    this.canvas.width = window.innerWidth;
-    this.canvas.height = window.innerHeight;
-  }
-
-  createParticles() {
-    for (let i = 0; i < 50; i++) {
-      this.particles.push({
-        x: Math.random() * this.canvas.width,
-        y: Math.random() * this.canvas.height,
-        vx: (Math.random() - 0.5) * 0.5,
-        vy: (Math.random() - 0.5) * 0.5,
-        size: Math.random() * 2 + 1
-      });
-    }
-  }
-
-  animate() {
-    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-    
-    this.particles.forEach(particle => {
-      particle.x += particle.vx;
-      particle.y += particle.vy;
-      
-      if (particle.x < 0 || particle.x > this.canvas.width) particle.vx *= -1;
-      if (particle.y < 0 || particle.y > this.canvas.height) particle.vy *= -1;
-      
-      this.ctx.beginPath();
-      this.ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
-      this.ctx.fillStyle = '#00ff88';
-      this.ctx.fill();
-    });
-    
-    requestAnimationFrame(() => this.animate());
-  }
-}
 
 // Theme Toggle
 class ThemeToggle {
@@ -421,14 +353,35 @@ class ThemeToggle {
   }
 }
 
-// Initialize particles on desktop only
-if (window.innerWidth > 768) {
-  document.addEventListener('DOMContentLoaded', () => {
-    new ParticleSystem();
-  });
+
+
+// FAQ Toggle
+class FAQToggle {
+  constructor() {
+    this.faqItems = document.querySelectorAll('.faq-item');
+    this.init();
+  }
+
+  init() {
+    this.faqItems.forEach(item => {
+      const question = item.querySelector('.faq-question');
+      question.addEventListener('click', () => {
+        // Close other items
+        this.faqItems.forEach(otherItem => {
+          if (otherItem !== item) {
+            otherItem.classList.remove('active');
+          }
+        });
+        
+        // Toggle current item
+        item.classList.toggle('active');
+      });
+    });
+  }
 }
 
-// Initialize theme toggle
+// Initialize theme toggle and FAQ
 document.addEventListener('DOMContentLoaded', () => {
   new ThemeToggle();
+  new FAQToggle();
 });

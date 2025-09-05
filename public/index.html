@@ -37,17 +37,14 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  
-  <!-- Performance & Security -->
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="referrer" content="strict-origin-when-cross-origin">
+
   <link rel="dns-prefetch" href="//fonts.googleapis.com">
   <link rel="dns-prefetch" href="//fonts.gstatic.com">
-  
+
   <!-- Google AdSense -->
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8437328263455404"
        crossorigin="anonymous"></script>
-  
+
   <!-- Structured Data -->
   <script type="application/ld+json">
   {
@@ -105,6 +102,8 @@
         <li><a href="#skills" class="nav-link">skills</a></li>
         <li><a href="#certifications" class="nav-link">certifications</a></li>
         <li><a href="#projects" class="nav-link">projects</a></li>
+        <li><a href="#blog" class="nav-link">articles</a></li>
+        <li><a href="#services" class="nav-link">services</a></li>
         <li><a href="#contact" class="nav-link">contact</a></li>
       </ul>
       <div class="nav-actions">
@@ -206,17 +205,29 @@ public class Developer {
           <div class="code-block">
             <pre><code>
 public AboutMe() {
-    this.background = "Passionate Java developer with expertise in\n" +
-                     "building enterprise applications and microservices";
+    this.background = "Passionate Java developer with 15+ years of expertise in\n" +
+                     "building enterprise applications, microservices, and\n" +
+                     "leading high-performance development teams";
 
     this.experience = "Specialized in Spring ecosystem, JPA/Hibernate,\n" +
-                     "and distributed systems architecture";
+                     "distributed systems architecture, cloud-native\n" +
+                     "applications, and DevOps practices";
 
     this.approach = "I follow SOLID principles, design patterns,\n" +
-                   "and test-driven development practices";
+                   "test-driven development, and agile methodologies\n" +
+                   "to deliver maintainable, scalable solutions";
+
+    this.expertise = "Deep knowledge in Java, Kotlin, Spring Boot,\n" +
+                    "microservices, REST/GraphQL APIs, MongoDB,\n" +
+                    "PostgreSQL, Docker, Kubernetes, and AWS/Azure";
+
+    this.leadership = "Experienced in leading multicultural teams,\n" +
+                     "mentoring developers, and driving technical\n" +
+                     "decisions in enterprise environments";
 
     this.goal = "Creating robust, scalable Java solutions\n" +
-               "for complex business requirements";
+               "for complex business requirements while\n" +
+               "fostering team growth and technical excellence";
 }
             </code></pre>
           </div>
@@ -601,6 +612,342 @@ public AboutMe() {
     </div>
   </section>
 
+  <!-- Blog/Articles Section -->
+  <section id="blog" class="blog">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Technical Articles</h2>
+        <div class="section-subtitle">List&lt;Article&gt; insights = Arrays.asList(</div>
+      </div>
+      <div class="blog-grid">
+        <article class="blog-card">
+          <div class="blog-header">
+            <div class="blog-category">Architecture</div>
+            <div class="blog-date">Dec 2024</div>
+          </div>
+          <h3 class="blog-title">Microservices Architecture Patterns in Enterprise Java</h3>
+          <p class="blog-excerpt">
+            Exploring proven architectural patterns for building scalable microservices using Spring Boot, including service discovery, circuit breakers, and distributed tracing. Learn how to implement resilient systems that can handle enterprise-scale traffic and maintain high availability.
+          </p>
+          <div class="blog-tags">
+            <span class="tag">Spring Boot</span>
+            <span class="tag">Microservices</span>
+            <span class="tag">Architecture</span>
+          </div>
+        </article>
+
+        <article class="blog-card">
+          <div class="blog-header">
+            <div class="blog-category">Performance</div>
+            <div class="blog-date">Nov 2024</div>
+          </div>
+          <h3 class="blog-title">Optimizing Java Applications for Cloud Deployment</h3>
+          <p class="blog-excerpt">
+            Deep dive into JVM tuning, memory management, and containerization strategies for Java applications in Kubernetes environments. Covers GraalVM native images, startup time optimization, and resource utilization best practices for cloud-native deployments.
+          </p>
+          <div class="blog-tags">
+            <span class="tag">JVM</span>
+            <span class="tag">Kubernetes</span>
+            <span class="tag">Performance</span>
+          </div>
+        </article>
+
+        <article class="blog-card">
+          <div class="blog-header">
+            <div class="blog-category">Security</div>
+            <div class="blog-date">Oct 2024</div>
+          </div>
+          <h3 class="blog-title">Implementing OAuth 2.0 and JWT in Spring Security</h3>
+          <p class="blog-excerpt">
+            Comprehensive guide to securing REST APIs with OAuth 2.0 flows, JWT token management, and Spring Security configuration. Includes practical examples of authorization servers, resource servers, and client implementations with best security practices.
+          </p>
+          <div class="blog-tags">
+            <span class="tag">Security</span>
+            <span class="tag">OAuth2</span>
+            <span class="tag">JWT</span>
+          </div>
+        </article>
+
+        <article class="blog-card">
+          <div class="blog-header">
+            <div class="blog-category">Database</div>
+            <div class="blog-date">Sep 2024</div>
+          </div>
+          <h3 class="blog-title">MongoDB vs PostgreSQL: Choosing the Right Database</h3>
+          <p class="blog-excerpt">
+            Detailed comparison of NoSQL and relational databases for enterprise applications. Covers data modeling strategies, performance characteristics, ACID compliance, and when to choose each technology based on specific use cases and scalability requirements.
+          </p>
+          <div class="blog-tags">
+            <span class="tag">MongoDB</span>
+            <span class="tag">PostgreSQL</span>
+            <span class="tag">Database Design</span>
+          </div>
+        </article>
+
+        <article class="blog-card">
+          <div class="blog-header">
+            <div class="blog-category">DevOps</div>
+            <div class="blog-date">Aug 2024</div>
+          </div>
+          <h3 class="blog-title">CI/CD Pipeline Best Practices for Java Applications</h3>
+          <p class="blog-excerpt">
+            Building robust continuous integration and deployment pipelines using Jenkins, Docker, and Kubernetes. Covers automated testing strategies, code quality gates, security scanning, and deployment automation for enterprise Java applications.
+          </p>
+          <div class="blog-tags">
+            <span class="tag">CI/CD</span>
+            <span class="tag">Jenkins</span>
+            <span class="tag">Docker</span>
+          </div>
+        </article>
+
+        <article class="blog-card">
+          <div class="blog-header">
+            <div class="blog-category">Kotlin</div>
+            <div class="blog-date">Jul 2024</div>
+          </div>
+          <h3 class="blog-title">Migrating from Java to Kotlin: Enterprise Perspective</h3>
+          <p class="blog-excerpt">
+            Strategic approach to adopting Kotlin in existing Java codebases. Covers interoperability patterns, migration strategies, team training considerations, and measuring the impact on development productivity and code quality in large-scale enterprise projects.
+          </p>
+          <div class="blog-tags">
+            <span class="tag">Kotlin</span>
+            <span class="tag">Migration</span>
+            <span class="tag">Enterprise</span>
+          </div>
+        </article>
+      </div>
+      <div class="section-footer">);</div>
+    </div>
+  </section>
+
+  <!-- Case Studies Section -->
+  <section id="case-studies" class="case-studies">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Case Studies</h2>
+        <div class="section-subtitle">List&lt;CaseStudy&gt; solutions = Arrays.asList(</div>
+      </div>
+      <div class="case-studies-content">
+        <div class="case-study">
+          <div class="case-study-header">
+            <h3 class="case-study-title">Scaling E-commerce Platform to Handle Black Friday Traffic</h3>
+            <div class="case-study-meta">
+              <span class="case-study-industry">E-commerce</span>
+              <span class="case-study-scale">10M+ Users</span>
+            </div>
+          </div>
+          <div class="case-study-content">
+            <div class="case-study-challenge">
+              <h4>Challenge</h4>
+              <p>The existing monolithic e-commerce platform was struggling to handle peak traffic during sales events, experiencing frequent downtime and poor user experience. The system needed to scale from handling 10K concurrent users to 100K+ during Black Friday sales.</p>
+            </div>
+            <div class="case-study-solution">
+              <h4>Solution</h4>
+              <p>Implemented a microservices architecture using Spring Boot and Kubernetes, with separate services for user management, product catalog, order processing, and payment handling. Introduced Redis for caching, Kafka for event streaming, and implemented circuit breakers for resilience.</p>
+            </div>
+            <div class="case-study-results">
+              <h4>Results</h4>
+              <ul>
+                <li>99.9% uptime during peak sales events</li>
+                <li>Response time improved from 3s to 200ms</li>
+                <li>Successfully handled 150K concurrent users</li>
+                <li>Reduced infrastructure costs by 30% through efficient resource utilization</li>
+              </ul>
+            </div>
+            <div class="case-study-tech">
+              <span class="tech-tag">Spring Boot</span>
+              <span class="tech-tag">Kubernetes</span>
+              <span class="tech-tag">Redis</span>
+              <span class="tech-tag">Kafka</span>
+              <span class="tech-tag">PostgreSQL</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="case-study">
+          <div class="case-study-header">
+            <h3 class="case-study-title">Real-time Data Processing Pipeline for Financial Services</h3>
+            <div class="case-study-meta">
+              <span class="case-study-industry">FinTech</span>
+              <span class="case-study-scale">1M+ Transactions/day</span>
+            </div>
+          </div>
+          <div class="case-study-content">
+            <div class="case-study-challenge">
+              <h4>Challenge</h4>
+              <p>Financial services company needed real-time fraud detection and transaction processing system capable of analyzing millions of transactions daily with sub-second latency requirements while maintaining strict compliance and audit trails.</p>
+            </div>
+            <div class="case-study-solution">
+              <h4>Solution</h4>
+              <p>Built event-driven architecture using Kafka Streams for real-time processing, implemented machine learning models for fraud detection, and created comprehensive audit logging system. Used MongoDB for flexible document storage and PostgreSQL for transactional data.</p>
+            </div>
+            <div class="case-study-results">
+              <h4>Results</h4>
+              <ul>
+                <li>Processing latency reduced from 5 seconds to 100ms</li>
+                <li>Fraud detection accuracy improved by 40%</li>
+                <li>100% compliance with financial regulations</li>
+                <li>Zero data loss with exactly-once processing guarantees</li>
+              </ul>
+            </div>
+            <div class="case-study-tech">
+              <span class="tech-tag">Kafka Streams</span>
+              <span class="tech-tag">MongoDB</span>
+              <span class="tech-tag">PostgreSQL</span>
+              <span class="tech-tag">Machine Learning</span>
+              <span class="tech-tag">Spring Boot</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="section-footer">);</div>
+    </div>
+  </section>
+
+  <!-- Services Section -->
+  <section id="services" class="services">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Services & Expertise</h2>
+        <div class="section-subtitle">List&lt;Service&gt; offerings = Arrays.asList(</div>
+      </div>
+      <div class="services-grid">
+        <div class="service-card">
+          <div class="service-icon">⚡</div>
+          <h3 class="service-title">Enterprise Java Development</h3>
+          <p class="service-description">
+            Full-stack Java development using Spring Boot, microservices architecture, and modern frameworks. Specializing in scalable enterprise applications with high availability and performance requirements.
+          </p>
+          <ul class="service-features">
+            <li>Spring Boot & Spring Cloud applications</li>
+            <li>Microservices architecture design</li>
+            <li>REST & GraphQL API development</li>
+            <li>Database design and optimization</li>
+            <li>Performance tuning and monitoring</li>
+          </ul>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon">☁️</div>
+          <h3 class="service-title">Cloud Architecture & DevOps</h3>
+          <p class="service-description">
+            Cloud-native application development and deployment using AWS, Azure, Docker, and Kubernetes. Implementing CI/CD pipelines and infrastructure as code for reliable, scalable deployments.
+          </p>
+          <ul class="service-features">
+            <li>AWS & Azure cloud solutions</li>
+            <li>Docker containerization</li>
+            <li>Kubernetes orchestration</li>
+            <li>CI/CD pipeline implementation</li>
+            <li>Infrastructure automation</li>
+          </ul>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon">👥</div>
+          <h3 class="service-title">Technical Leadership & Mentoring</h3>
+          <p class="service-description">
+            Leading development teams, establishing best practices, and mentoring developers. Experienced in agile methodologies, code reviews, and technical decision-making in enterprise environments.
+          </p>
+          <ul class="service-features">
+            <li>Team leadership and management</li>
+            <li>Technical architecture decisions</li>
+            <li>Code review and quality assurance</li>
+            <li>Developer mentoring and training</li>
+            <li>Agile/Scrum implementation</li>
+          </ul>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon">🔧</div>
+          <h3 class="service-title">System Integration & Migration</h3>
+          <p class="service-description">
+            Legacy system modernization, API integration, and data migration services. Helping organizations transition from monolithic to microservices architecture with minimal downtime.
+          </p>
+          <ul class="service-features">
+            <li>Legacy system modernization</li>
+            <li>Monolith to microservices migration</li>
+            <li>Third-party API integrations</li>
+            <li>Data migration and transformation</li>
+            <li>System performance optimization</li>
+          </ul>
+        </div>
+      </div>
+      <div class="section-footer">);</div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section id="faq" class="faq">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Frequently Asked Questions</h2>
+        <div class="section-subtitle">Map&lt;String, String&gt; faqs = new HashMap&lt;&gt;() {{</div>
+      </div>
+      <div class="faq-content">
+        <div class="faq-item">
+          <div class="faq-question">
+            <h3>What technologies do you specialize in?</h3>
+            <span class="faq-toggle">+</span>
+          </div>
+          <div class="faq-answer">
+            <p>I specialize in Java ecosystem technologies including Java 8-23, Kotlin, Spring Boot, Spring Cloud, Hibernate/JPA, and modern frameworks. For databases, I work with PostgreSQL, MongoDB, and Oracle. I'm experienced with cloud platforms (AWS, Azure), containerization (Docker, Kubernetes), and messaging systems (Kafka, RabbitMQ).</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            <h3>How do you approach microservices architecture?</h3>
+            <span class="faq-toggle">+</span>
+          </div>
+          <div class="faq-answer">
+            <p>I follow domain-driven design principles to identify service boundaries, implement API-first design with comprehensive documentation, ensure proper service communication patterns, and establish monitoring and observability. I also focus on data consistency strategies, circuit breaker patterns for resilience, and automated testing at all levels.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            <h3>What is your experience with team leadership?</h3>
+            <span class="faq-toggle">+</span>
+          </div>
+          <div class="faq-answer">
+            <p>I have led teams ranging from 3 to 15 developers across multiple time zones and cultures. My leadership approach includes mentoring junior developers, establishing coding standards and best practices, facilitating technical discussions and decision-making, implementing agile processes, and fostering a collaborative team environment focused on continuous learning.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            <h3>How do you ensure code quality and maintainability?</h3>
+            <span class="faq-toggle">+</span>
+          </div>
+          <div class="faq-answer">
+            <p>I implement comprehensive testing strategies including unit tests, integration tests, and end-to-end testing. I enforce code review processes, use static code analysis tools, follow SOLID principles and design patterns, maintain clear documentation, and establish CI/CD pipelines with quality gates to prevent issues from reaching production.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            <h3>What is your approach to performance optimization?</h3>
+            <span class="faq-toggle">+</span>
+          </div>
+          <div class="faq-answer">
+            <p>I start with comprehensive monitoring and profiling to identify bottlenecks, optimize database queries and indexing strategies, implement appropriate caching mechanisms (Redis, in-memory caching), tune JVM parameters for optimal performance, and design efficient algorithms and data structures. I also focus on horizontal scaling strategies and load balancing.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            <h3>How do you handle legacy system modernization?</h3>
+            <span class="faq-toggle">+</span>
+          </div>
+          <div class="faq-answer">
+            <p>I use the strangler fig pattern for gradual migration, implement API gateways for seamless integration, ensure comprehensive testing during transition phases, maintain backward compatibility where necessary, and plan phased rollouts with rollback strategies. The goal is to minimize business disruption while modernizing the technology stack.</p>
+          </div>
+        </div>
+      </div>
+      <div class="section-footer">}};</div>
+    </div>
+  </section>
+
   <!-- Personal Websites -->
   <section class="personal-sites">
     <div class="container">
@@ -682,7 +1029,7 @@ public AboutMe() {
   </section>
 
   </main>
-  
+
   <!-- Footer -->
   <footer class="footer" role="contentinfo">
     <div class="container">
