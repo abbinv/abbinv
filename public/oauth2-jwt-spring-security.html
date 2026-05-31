@@ -1,0 +1,358 @@
+<!doctype html>
+<html class="no-js" lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Implementing OAuth 2.0 and JWT in Spring Security - Abbin Varghese</title>
+  <meta name="description" content="Comprehensive guide to securing REST APIs with OAuth 2.0 flows, JWT token management, and Spring Security configuration. Covers authorization servers, resource servers, and best practices.">
+  <meta name="keywords" content="OAuth 2.0, JWT, Spring Security, Authorization Server, Resource Server, Access Token, Refresh Token, Spring Boot, Java Security, REST API Security">
+  <meta name="author" content="Abbin Varghese">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://abbinvarghese.com/oauth2-jwt-spring-security.html">
+
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" href="/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icon.png">
+  <meta name="theme-color" content="#0a0a0a">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8437328263455404"
+       crossorigin="anonymous"></script>
+
+  <style>
+    .article-page {
+      padding-top: 100px;
+      min-height: 100vh;
+    }
+    .article-container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+    .article-header {
+      margin-bottom: 2rem;
+    }
+    .article-header h1 {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 2rem;
+      color: var(--primary-color);
+      margin-bottom: 0.5rem;
+    }
+    .article-meta {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
+    }
+    .article-meta span {
+      margin-right: 1.5rem;
+    }
+    .article-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 0.75rem;
+    }
+    .article-tags .tag {
+      background: rgba(0, 255, 136, 0.1);
+      color: var(--primary-color);
+      padding: 0.25rem 0.75rem;
+      border-radius: 4px;
+      font-size: 0.8rem;
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .article-content {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 2rem;
+    }
+    .article-content h2 {
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--primary-color);
+      font-size: 1.3rem;
+      margin-top: 2rem;
+      margin-bottom: 0.75rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--border-color);
+    }
+    .article-content h2:first-child {
+      margin-top: 0;
+    }
+    .article-content h3 {
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--text-primary);
+      font-size: 1.1rem;
+      margin-top: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+    .article-content p {
+      color: var(--text-secondary);
+      line-height: 1.8;
+      margin-bottom: 1rem;
+    }
+    .article-content ul, .article-content ol {
+      color: var(--text-secondary);
+      padding-left: 1.5rem;
+      margin-bottom: 1rem;
+    }
+    .article-content ul li, .article-content ol li {
+      margin-bottom: 0.5rem;
+      line-height: 1.6;
+    }
+    .article-content a {
+      color: var(--primary-color);
+      text-decoration: none;
+    }
+    .article-content a:hover {
+      text-decoration: underline;
+    }
+    .article-content code {
+      font-family: 'JetBrains Mono', monospace;
+      background: rgba(0, 255, 136, 0.05);
+      border: 1px solid var(--border-color);
+      padding: 0.15rem 0.4rem;
+      border-radius: 4px;
+      font-size: 0.85rem;
+      color: var(--primary-color);
+    }
+    .article-content pre {
+      background: #0d0d0d;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 1.5rem;
+      overflow-x: auto;
+      margin-bottom: 1.5rem;
+    }
+    .article-content pre code {
+      background: none;
+      border: none;
+      padding: 0;
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+    .article-footer {
+      margin-top: 3rem;
+      padding: 1.5rem;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+    }
+    .article-footer-nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      justify-content: center;
+    }
+    .article-footer-nav a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: color 0.3s ease;
+    }
+    .article-footer-nav a:hover {
+      color: var(--primary-color);
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Navigation -->
+  <nav class="nav">
+    <div class="nav-container">
+      <div class="nav-logo">
+        <a href="/" style="text-decoration: none;"><span class="terminal-prompt">javac AbbinV.java</span></a>
+      </div>
+      <ul class="nav-menu">
+        <li><a href="/" class="nav-link">home</a></li>
+        <li><a href="/microservices-architecture-java.html" class="nav-link">articles</a></li>
+        <li><a href="/privacy-policy.html" class="nav-link">privacy</a></li>
+        <li><a href="/terms-of-service.html" class="nav-link">terms</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Article Content -->
+  <main class="article-page">
+    <div class="article-container">
+      <div class="article-header">
+        <h1>// Implementing OAuth 2.0 and JWT in Spring Security</h1>
+        <div class="article-meta">
+          <span>Abbin Varghese</span>
+          <span>Oct 2024</span>
+        </div>
+        <div class="article-tags">
+          <span class="tag">Security</span>
+          <span class="tag">OAuth2</span>
+          <span class="tag">JWT</span>
+          <span class="tag">Spring Boot</span>
+        </div>
+      </div>
+
+      <div class="article-content">
+        <h2>Introduction to OAuth 2.0 in Modern Applications</h2>
+        <p>
+          Securing REST APIs in enterprise Java applications requires a robust authentication and authorization framework. OAuth 2.0 has become the industry standard protocol for authorization, providing delegated access to server resources on behalf of a resource owner. When combined with JSON Web Tokens for stateless authentication, Spring Security offers a powerful and flexible solution for protecting microservices and distributed systems. This guide covers the essential patterns, configurations, and best practices for implementing OAuth 2.0 with JWT in Spring Boot applications.
+        </p>
+        <p>
+          OAuth 2.0 separates the concerns of authentication and authorization by introducing distinct roles: the resource owner, the client application, the authorization server, and the resource server. This separation allows applications to grant limited access to user accounts on third-party services without exposing credentials. In enterprise environments, this architecture enables single sign-on across multiple services, fine-grained access control, and centralized token management.
+        </p>
+
+        <h2>OAuth 2.0 Grant Types and Flows</h2>
+        <h3>Authorization Code Flow</h3>
+        <p>
+          The authorization code flow is the most secure and commonly used grant type for server-side applications. The client redirects the user to the authorization server, which authenticates the user and returns an authorization code. The client then exchanges this code for an access token through a back-channel request. This flow prevents the access token from being exposed to the user agent and is suitable for confidential clients that can securely store client secrets.
+        </p>
+        <p>
+          In Spring Security, the authorization code flow is configured through the OAuth2 Login support. The framework handles the redirect, code exchange, and token storage automatically. For applications acting as OAuth2 clients, Spring Security provides built-in support for common providers like Google, GitHub, and Okta, while also allowing custom provider configuration for enterprise authorization servers.
+        </p>
+
+        <h3>Client Credentials Flow</h3>
+        <p>
+          The client credentials grant type is designed for machine-to-machine communication where no user context is required. The client authenticates directly with the authorization server using its own credentials and receives an access token. This flow is ideal for service-to-service communication in microservices architectures, batch processing jobs, and backend integrations where the application itself is the resource owner.
+        </p>
+        <p>
+          Spring Security simplifies client credentials configuration through the <code>OAuth2AuthorizedClientManager</code> and reactive equivalents. The framework manages token acquisition, caching, and automatic refresh, reducing boilerplate code in service-to-service calls.
+        </p>
+
+        <h2>JWT Token Structure and Claims</h2>
+        <p>
+          JSON Web Tokens consist of three Base64URL-encoded parts separated by dots: the header, the payload, and the signature. The header specifies the signing algorithm, the payload contains claims about the authenticated entity, and the signature ensures token integrity. JWTs are self-contained, meaning the resource server can validate tokens without contacting the authorization server, reducing latency in distributed systems.
+        </p>
+        <p>
+          Standard JWT claims include <code>iss</code> (issuer), <code>sub</code> (subject), <code>aud</code> (audience), <code>exp</code> (expiration time), <code>iat</code> (issued at), and <code>jti</code> (JWT ID). Custom claims can carry application-specific data such as user roles, permissions, and tenant identifiers. Here is an example of a typical JWT payload for a Spring Security application:
+        </p>
+        <pre><code>{
+  "iss": "https://auth.example.com",
+  "sub": "user-12345",
+  "aud": "api-gateway",
+  "exp": 1698451200,
+  "iat": 1698447600,
+  "scope": "read write",
+  "roles": ["ROLE_USER", "ROLE_ADMIN"],
+  "tenant_id": "org-001"
+}</code></pre>
+
+        <h2>Spring Security Configuration for Resource Servers</h2>
+        <p>
+          Configuring a Spring Boot application as an OAuth2 resource server involves defining a <code>SecurityFilterChain</code> bean that validates incoming JWT tokens. The resource server verifies the token signature, checks expiration, and extracts authorities from token claims. Spring Security 6 uses the component-based security configuration approach with the <code>@Configuration</code> and <code>@EnableWebSecurity</code> annotations.
+        </p>
+        <pre><code>@Configuration
+@EnableWebSecurity
+public class SecurityConfig {
+
+    @Bean
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        http
+            .authorizeHttpRequests(auth -> auth
+                .requestMatchers("/api/public/**").permitAll()
+                .requestMatchers("/api/admin/**").hasRole("ADMIN")
+                .requestMatchers("/api/**").authenticated()
+            )
+            .oauth2ResourceServer(oauth2 -> oauth2
+                .jwt(jwt -> jwt
+                    .jwtAuthenticationConverter(jwtAuthConverter())
+                )
+            )
+            .sessionManagement(session -> session
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+            )
+            .csrf(csrf -> csrf.disable());
+
+        return http.build();
+    }
+
+    @Bean
+    public JwtAuthenticationConverter jwtAuthConverter() {
+        JwtGrantedAuthoritiesConverter authoritiesConverter =
+            new JwtGrantedAuthoritiesConverter();
+        authoritiesConverter.setAuthorityPrefix("ROLE_");
+        authoritiesConverter.setAuthoritiesClaimName("roles");
+
+        JwtAuthenticationConverter converter =
+            new JwtAuthenticationConverter();
+        converter.setJwtGrantedAuthoritiesConverter(authoritiesConverter);
+        return converter;
+    }
+}</code></pre>
+        <p>
+          The configuration above establishes stateless session management, disables CSRF for API endpoints, and maps JWT claims to Spring Security authorities. The <code>JwtAuthenticationConverter</code> extracts role information from the token's custom claims and converts them into granted authorities that Spring Security uses for access decisions.
+        </p>
+
+        <h2>Authorization Server Configuration</h2>
+        <p>
+          Spring Authorization Server is the official Spring project for building OAuth 2.0 authorization servers. It supports all standard grant types, token introspection, token revocation, and OpenID Connect. The authorization server issues access tokens, refresh tokens, and ID tokens based on registered client configurations and user authentication.
+        </p>
+        <p>
+          Key configuration elements include registered client definitions with allowed grant types and redirect URIs, token settings for access token lifetime and refresh token policies, and JWK source configuration for token signing. The authorization server exposes standard endpoints including <code>/oauth2/authorize</code>, <code>/oauth2/token</code>, and <code>/.well-known/openid-configuration</code> for discovery.
+        </p>
+        <pre><code>@Bean
+public RegisteredClientRepository registeredClientRepository() {
+    RegisteredClient client = RegisteredClient
+        .withId(UUID.randomUUID().toString())
+        .clientId("api-client")
+        .clientSecret("{noop}secret")
+        .clientAuthenticationMethod(
+            ClientAuthenticationMethod.CLIENT_SECRET_BASIC)
+        .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
+        .authorizationGrantType(AuthorizationGrantType.REFRESH_TOKEN)
+        .authorizationGrantType(AuthorizationGrantType.CLIENT_CREDENTIALS)
+        .redirectUri("http://localhost:8080/login/oauth2/code/api-client")
+        .scope(OidcScopes.OPENID)
+        .scope("read")
+        .scope("write")
+        .tokenSettings(TokenSettings.builder()
+            .accessTokenTimeToLive(Duration.ofMinutes(15))
+            .refreshTokenTimeToLive(Duration.ofDays(7))
+            .reuseRefreshTokens(false)
+            .build())
+        .build();
+
+    return new InMemoryRegisteredClientRepository(client);
+}</code></pre>
+
+        <h2>Best Practices for Production Deployments</h2>
+        <p>
+          Implementing OAuth 2.0 and JWT in production environments requires careful attention to security, performance, and operational concerns. Following established best practices helps prevent common vulnerabilities and ensures reliable token-based authentication across your services.
+        </p>
+        <ul>
+          <li><strong>Short-lived access tokens:</strong> Keep access token lifetimes between 5 and 15 minutes. Short-lived tokens limit the window of exposure if a token is compromised. Use refresh tokens for obtaining new access tokens without requiring re-authentication.</li>
+          <li><strong>Token rotation:</strong> Implement refresh token rotation where each use of a refresh token invalidates the previous one and issues a new refresh token. This detects token theft when a stolen refresh token is used after the legitimate client has already rotated it.</li>
+          <li><strong>Audience validation:</strong> Always validate the <code>aud</code> claim in JWT tokens to ensure the token was intended for your specific resource server. This prevents tokens issued for one service from being used to access another.</li>
+          <li><strong>Asymmetric signing:</strong> Use RSA or ECDSA algorithms for JWT signing in production. Asymmetric keys allow resource servers to verify tokens using the public key without needing access to the private signing key, improving security in distributed deployments.</li>
+          <li><strong>Scope-based access control:</strong> Define granular scopes that map to specific API operations. Combine scope validation with role-based access control for defense in depth. Validate both the token scope and user authorities before granting access to protected resources.</li>
+          <li><strong>HTTPS everywhere:</strong> All OAuth 2.0 communication must occur over TLS. Access tokens, refresh tokens, and authorization codes transmitted over unencrypted channels can be intercepted and replayed by attackers.</li>
+          <li><strong>Token revocation:</strong> Implement token revocation endpoints and maintain a deny list for invalidated tokens. While JWTs are stateless by design, critical security events like password changes or account compromises require immediate token invalidation.</li>
+          <li><strong>PKCE for public clients:</strong> Use Proof Key for Code Exchange with all public clients, including single-page applications and mobile apps. PKCE prevents authorization code interception attacks without requiring a client secret.</li>
+        </ul>
+
+        <h2>Conclusion</h2>
+        <p>
+          OAuth 2.0 and JWT provide a scalable, standards-based approach to securing Spring Boot applications. The combination of delegated authorization through OAuth 2.0 flows and stateless authentication via JWT tokens enables enterprise applications to implement robust security without sacrificing performance. Spring Security's comprehensive support for both resource servers and authorization servers simplifies implementation while maintaining flexibility for custom requirements. By following the configuration patterns and best practices outlined in this guide, development teams can build secure, maintainable authentication systems that scale across microservices architectures.
+        </p>
+      </div>
+
+      <!-- Article Footer Navigation -->
+      <div class="article-footer">
+        <nav class="article-footer-nav">
+          <a href="/">← Back to Portfolio</a>
+          <a href="/microservices-architecture-java.html">Microservices</a>
+          <a href="/java-cloud-optimization.html">Cloud Optimization</a>
+          <a href="/mongodb-vs-postgresql.html">MongoDB vs PostgreSQL</a>
+          <a href="/cicd-pipeline-java.html">CI/CD Pipelines</a>
+          <a href="/privacy-policy.html">Privacy Policy</a>
+          <a href="/terms-of-service.html">Terms of Service</a>
+        </nav>
+      </div>
+    </div>
+  </main>
+</body>
+
+</html>
